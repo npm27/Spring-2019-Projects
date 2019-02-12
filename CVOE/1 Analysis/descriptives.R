@@ -40,3 +40,16 @@ tapply(dat$RT,
        list(dat$block_type, dat$Congruent), mean)
 tapply(dat$score,
        list(dat$block_type, dat$Congruent), mean)
+
+##so screens/trimming
+##trim at the subject level, not overall average (do it within subjects)
+
+##transform rts to z
+##cost as a function of trial effects?
+##look at it as function of subject
+
+##check by subject
+tapply(dat$score,
+       list(dat$block_type, dat$Subject), mean)
+tapply(dat$RT,
+       list(dat$block_type, dat$Subject), mean)

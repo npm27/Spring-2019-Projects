@@ -1,6 +1,6 @@
 ExperimentName,Subject,Block,ListNum,cue_target,Jol_Response,cue_prompt,recall_response,Scored_Response
-T_JOL C,35,1,1,Enough - Full,76,Enough - ?,full,
-T_JOL C,35,1,2,Sip - Drink,10,Sip - ?,soda,
+T_JOL C,35,1,1,Enough - Full,76,Enough - ?,full,1
+T_JOL C,35,1,2,Sip - Drink,10,Sip - ?,soda,0
 T_JOL C,35,1,3,Cave - Dark,44,Cave - ?,dark,
 T_JOL C,35,1,4,Seize - Take,10,Seize - ?,phone,
 T_JOL C,35,1,5,Growth - Height,66,Growth - ?,child,

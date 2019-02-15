@@ -1,0 +1,85 @@
+---
+output            : papaja::apa6_pdf
+---
+
+```{r, include=FALSE}
+library(papaja)
+library(knitr)
+```
+
+```{r unique, echo=FALSE, results='asis', warning=FALSE}
+
+####Stim Table####
+tableprint1 = matrix(NA, nrow = 6, ncol = 6)
+colnames(tableprint1) = c("JOL Condition", "Variable", "$M$", "$SD$", "Min", "Max")
+
+tableprint1[1, ] = c("Forward", "FSG", ".374", ".206", ".046", ".808")
+tableprint1[2, ] = c(" ", "BSG", "0", "0", "0", "0")
+tableprint1[3, ] = c("Backward", "FSG", "0", "0", "0", "0")
+tableprint1[4, ] = c(" ", "BSG", ".374", ".206", ".046", ".808")
+tableprint1[5, ] = c("Symmetrical", "FSG", ".186", ".128", ".014", ".495")
+tableprint1[6, ] = c(" ", "BSG", ".187", ".130", ".020", ".521")
+
+apa_table(as.data.frame(tableprint1),
+          align = c(rep("l", 2), rep("c", 4)), 
+          caption = "Summary statistics for associative overlap variables",
+          note = "Values are grouped by JOL condition. FSG and BSG values for unrelated pairs are not included as by definition these pairs have not been normed.",
+          col.names =  c("Condition", "Variable", "$M$", "$SD$", "Min", "Max"),
+          escape = FALSE)
+
+```
+
+```{r cue-items1, echo=FALSE, results='asis', warning=FALSE}
+tableprint2 = matrix(NA, nrow = 12, ncol = 6)
+colnames(tableprint2) = c("JOL Condition", "Variable", "$M$", "$SD$", "Min", "Max")
+
+tableprint2[1, ] = c("Forward", "Length", "6.075", "2.005", "3", "10")
+tableprint2[2, ] = c(" ", "Concreteness", "4.773", "1.114", "2.610", "6.530")
+tableprint2[3, ] = c(" ", "Frequency", "2.471", "0.645", "1.591", "4.861")
+tableprint2[4, ] = c("Backward", "Length", "4.550", "1.280", "3", "8")
+tableprint2[5, ] = c(" ", "Concreteness", "4.767", "1.217", "2.670", "6.630")
+tableprint2[6, ] = c(" ", "Frequency", "3.762", "0.613", "2.422", "4.984")
+tableprint2[7, ] = c("Symmetrical", "Length", "5.175", "1.738", "3", "12")
+tableprint2[8, ] = c(" ", "Concreteness", "4.664", "1.451", "2.050", "6.450")
+tableprint2[9, ] = c(" ", "Frequency", "3.296", "0.684", "1.663", "4.415")
+tableprint2[10, ] = c("Unrelated", "Length", "5.125", "1.556", "3", "11")
+tableprint2[11, ] = c(" ", "Concreteness", "4.595", "1.399", "2.180", "6.930")
+tableprint2[12, ] = c(" ", "Frequency", "3.197", "0.802", "1.279", "4.775")
+
+apa_table(as.data.frame(tableprint2),
+          align = c(rep("l", 2), rep("c", 4)), 
+          caption = "Summary statistics for cue item properties",
+          note = "Values are grouped by JOL condition. Frequency is measured using SUBTLEX.",
+          col.names =  c("Condition", "Variable", "$M$", "$SD$", "Min", "Max"),
+          escape = FALSE)
+```
+
+```{r target-items2, echo=FALSE, results='asis', warning=FALSE}
+tableprint3 = matrix(NA, nrow = 12, ncol = 6)
+colnames(tableprint2) = c("JOL Condition", "Variable", "$M$", "$SD$", "Min", "Max")
+
+tableprint3[1, ] = c("Forward", "Length", "4.350", "1.272", "3", "8")
+tableprint3[2, ] = c(" ", "Concreteness", "5.118", "1.051", "2.400", "6.670")
+tableprint3[3, ] = c(" ", "Frequency", "3.741", "0.643", "2.438", "5.295")
+tableprint3[4, ] = c("Backward", "Length", "6.275", "1.724", "3", "10")
+tableprint3[5, ] = c(" ", "Concreteness", "5.244", "1.293", "2.430", "7")
+tableprint3[6, ] = c(" ", "Frequency", "2.489", "0.705", "0.954", "4.408")
+tableprint3[7, ] = c("Symmetrical", "Length", "5.250", "2.145", "3", "13")
+tableprint3[8, ] = c(" ", "Concreteness", "4.721", "1.341", "2.350", "6.830")
+tableprint3[9, ] = c(" ", "Frequency", "3.162", "0.665", "1.681", "5.497")
+tableprint3[10, ] = c("Unrelated", "Length", "5.300", "1.488", "3", "8")
+tableprint3[11, ] = c(" ", "Concreteness", "4.671", "1.152", "2.880", "6.630")
+tableprint3[12, ] = c(" ", "Frequency", "3.176", "0.897", "0.954", "4.955")
+
+apa_table(as.data.frame(tableprint3),
+          align = c(rep("l", 2), rep("c", 4)), 
+          caption = "Summary statistics for target item properties",
+          note = "Values are grouped by JOL condition. Frequency is measured using SUBTLEX.",
+          col.names =  c("Condition", "Variable", "$M$", "$SD$", "Min", "Max"),
+          escape = FALSE)
+```
+
+
+```{r}
+render_appendix("appendix.Rmd")
+```

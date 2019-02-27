@@ -67,6 +67,6 @@ bar1 = bar1 +
   cleanup +
   xlab("Direction") +
   ylab("Mean Task Performance") +
-  #ylim(0,100) +
+  ylim(0,100) +
   labs(title="All Blocks") 
 bar1

@@ -1,5 +1,5 @@
 ##set up
-dat = read.csv("output 2_14 final.csv")
+dat = read.csv("ex2 final output.csv")
 
 library(ggplot2)
 library(reshape)
@@ -7,14 +7,13 @@ library(reshape)
 ##put recall on correct scale
 dat$Scored_Response = (dat$Scored_Response * 100) 
 
-##make jol score numeric
-dat$Jol_Response = as.numeric(dat$Jol_Response)
-
-##make 101's = 100
-dat$Jol_Response[dat$Jol_Response > "100"] = NA
+##remove out of range scores
+dat$Jol_Response[dat$Jol_Response > 100] = NA
 
 ##get sample size
-summary(dat$Subject) #n = 18
+summary(dat$Subject) #n = 27
+
+summary(dat)
 
 ##remove missing
 nomissing = na.omit(dat)
@@ -31,10 +30,9 @@ tapply(nomissing$Scored_Response,
        nomissing$Direction, sd)
 
 ####make the graph####
-nomiss = na.omit(long.dat)
 
 ##melt the data
-long.dat = melt(dat, id = c("Subject", "Block",
+long.dat = melt(nomissing, id = c("Subject", "Block",
                                "ListNum", "Direction", "ExperimentName", "cue_target",
                                "recall_response", "cue_prompt"))
 
@@ -50,7 +48,7 @@ cleanup = theme(panel.grid.major = element_blank(),
                 legend.key = element_rect(fill = "white"),
                 text = element_text(size = 15))
 
-bar1 = ggplot(nomiss, aes(Direction, Score, fill = Task))
+bar1 = ggplot(long.dat, aes(Direction, Score, fill = Task))
 bar1 = bar1 +
   stat_summary(fun.y = mean, 
                geom = "bar",

@@ -1,5 +1,5 @@
 ##Load data
-combined = read.csv("Final_CVOE_Trimmed.csv")
+combined = read.csv("corrected.csv")
 
 ####check descriptives####
 ##mean rts by group
@@ -7,7 +7,7 @@ tapply(combined$RT,
               combined$block_type, mean)
 
 ##mean percent correct by group
-tapply(combined$score * 100,
+tapply(combined$score2 * 100,
               combined$block_type, mean)
 
 ##differences within switch groups
@@ -22,9 +22,9 @@ tapply(yes.switch$RT,
 tapply(no.switch$RT,
        no.switch$block_type, mean)
 
-tapply(yes.switch$score * 100,
+tapply(yes.switch$score2 * 100,
        yes.switch$block_type, mean)
-tapply(no.switch$score * 100,
+tapply(no.switch$score2 * 100,
        no.switch$block_type, mean)
 
 ##congruency
@@ -41,7 +41,7 @@ tapply(combined$score,
 ##look at it as function of subject
 
 ##check by subject
-tapply(combined$score,
+tapply(combined$score2,
        list(combined$block_type, combined$Subject), mean)
 tapply(combined$RT,
        list(combined$block_type, combined$Subject), mean)

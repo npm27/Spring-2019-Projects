@@ -1,6 +1,9 @@
 ##Load data
 combined = read.csv("Final_CVOE_Trimmed.csv")
 
+rt = subset(combined,
+            combined$score2 == 1)
+
 ####check descriptives####
 ##mean rts by group
 tapply(combined$RT,
@@ -16,6 +19,11 @@ yes.switch = subset(combined,
                     combined$Switch == "Y")
 no.switch = subset(combined,
                    combined$Switch == "N")
+
+yes.switch.rt = subset(rt,
+                    rt$Switch == "Y")
+no.switch.rt = subset(rt,
+                   rt$Switch == "N")
 
 tapply(yes.switch$RT,
        yes.switch$block_type, mean)
@@ -50,8 +58,8 @@ pure_oe_m = list(m1[3, ])
 alt_run_m = list(m1[1, ])
 shuff_m = list(m1[4, ])
 
-rt1 = tapply(combined$RT,
-       list(combined$block_type, combined$Subject), mean)
+rt1 = tapply(rt$RT,
+       list(rt$block_type, rt$Subject), mean)
 
 pure_cv_rt = list(rt1[2, ])
 pure_oe_rt = list(rt1[3, ])
@@ -65,8 +73,8 @@ m2 = tapply(yes.switch$score2,
 switch_alt_run_m = list(m2[1, ])
 switch_shuff_m = list(m2[4, ])
 
-rt2 = tapply(yes.switch$RT,
-       list(yes.switch$block_type, yes.switch$Subject), mean)
+rt2 = tapply(yes.switch.rt$RT,
+       list(yes.switch.rt$block_type, yes.switch.rt$Subject), mean)
 
 switch_alt_run_rt = list(rt2[1, ])
 switch_shuff_rt = list(rt2[4, ])
@@ -78,8 +86,8 @@ m3 = tapply(no.switch$score2,
 no_switch_alt_run_m = list(m3[1, ])
 no_switch_shuff_m = list(m3[4, ])
 
-rt3 = tapply(no.switch$RT,
-       list(no.switch$block_type, no.switch$Subject), mean)
+rt3 = tapply(no.switch.rt$RT,
+       list(no.switch.rt$block_type, no.switch.rt$Subject), mean)
 
 no_switch_alt_run_rt = list(rt3[1, ])
 no_switch_shuff_rt = list(rt3[4, ])
@@ -98,4 +106,4 @@ colnames(output)[2:17] = c("pure_cv_m", "pure_cv_rt", "pure_oe_m", "pure_oe_rt",
                            "switch_shuff_rt", "no_switch_altrun_m", "no_switch_altrun_rt",
                            "no_switch_shuff_m", "no_switch_shuff_rt")
 
-write.csv(output, file = "CVOE_Means.csv", row.names = FALSE)
+#write.csv(output, file = "CVOE_Means.csv", row.names = FALSE)

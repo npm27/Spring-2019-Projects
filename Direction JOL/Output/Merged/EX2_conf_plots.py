@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-#dat = pd.read_csv("") JUST NEED TO ADD DATA
+dat = pd.read_csv("conf_plot_2.csv") #JUST NEED TO ADD DATA
 
 dat['diff'] = dat['upper'].sub(dat['lower'])
 dat['diff2'] = dat['diff'].div(2)
@@ -87,4 +87,4 @@ ax4.set_title("Unrelated", fontsize = 16)
 ax4.errorbar(x4, y4, yerr=(datU['diff2']), fmt='none', c= 'k', capsize=5)
 
 ##save figure
-fig.savefig('Plot1.pdf')
+#fig.savefig('Plot2.pdf')

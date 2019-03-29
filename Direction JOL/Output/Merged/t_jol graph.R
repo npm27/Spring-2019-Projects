@@ -29,6 +29,10 @@ tapply(nomissing$Scored_Response,
 tapply(nomissing$Scored_Response,
        nomissing$Direction, sd)
 
+##fix column names
+colnames(nomissing)[6] = "Jol"
+colnames(nomissing)[9] = "Recall"
+
 ####make the graph####
 
 ##melt the data
@@ -60,12 +64,12 @@ bar1 = bar1 +
                width = 0.2,
                color = "black") +
   scale_fill_manual("Task",
-                    values = c("Jol_Response" = "white",
-                               "Scored_Response" = "dimgray")) +
+                    values = c("Jol" = "midnightblue",
+                               "Recall" = "dodgerblue")) +
   cleanup +
   xlab("Direction") +
-  ylab("Mean Task Performance") +
-  ylim(0,100)
+  ylab("Mean Task Performance")
+  #ylim(0,100)
   #labs(title="All Blocks") 
 bar1
 

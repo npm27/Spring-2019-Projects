@@ -1,6 +1,6 @@
 ####create an answer key####
 ##setup
-dat = read.csv("Final_CVOE.csv")
+dat = read.csv("Final_CVOE 2.csv")
 
 pure = subset(dat,
               dat$block_type == "oe" | dat$block_type == "cv")
@@ -17,7 +17,6 @@ for (i in dat$STIM){
 }
 
 ####switch trials####
-
 string1 = as.character(switch$STIM)
   
 starts = seq(1, num.chars, by = 2)
@@ -199,11 +198,11 @@ pure.oe$score2 = as.numeric(pure.oe$match2)
 
 ####put everything back together####
 ##match column names
-colnames(pure.cv)[19] = "key2"
-colnames(pure.oe)[19] = "key2"
-colnames(switch.cv)[19] = "key2"
-colnames(switch.oe)[19] = "key2"
+colnames(pure.cv)[16] = "key2"
+colnames(pure.oe)[16] = "key2"
+colnames(switch.cv)[16] = "key2"
+colnames(switch.oe)[16] = "key2"
 
 final = rbind(pure.cv, pure.oe, switch.cv, switch.oe)
 
-#write.csv(final, file = "corrected.csv")
+#write.csv(final, file = "corrected 4_1.csv")

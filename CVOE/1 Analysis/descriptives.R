@@ -1,5 +1,5 @@
 ##Load data
-combined = read.csv("Final_CVOE_Trimmed.csv")
+combined = read.csv("Final_CVOE_Trimmed 4_1.csv")
 
 rt = subset(combined,
             combined$score2 == 1)
@@ -93,7 +93,7 @@ no_switch_alt_run_rt = list(rt3[1, ])
 no_switch_shuff_rt = list(rt3[4, ])
 
 ####put all the output into a dataframe
-subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16)
+subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)
 
 output = data.frame(subID, pure_cv_m, pure_cv_rt, pure_oe_m, pure_oe_rt, alt_run_m, alt_run_rt, 
                     shuff_m, shuff_rt, switch_alt_run_m, switch_alt_run_rt, switch_shuff_m, 
@@ -107,3 +107,32 @@ colnames(output)[2:17] = c("pure_cv_m", "pure_cv_rt", "pure_oe_m", "pure_oe_rt",
                            "no_switch_shuff_m", "no_switch_shuff_rt")
 
 #write.csv(output, file = "CVOE_Means.csv", row.names = FALSE)
+
+####set up output####
+##mean errors
+mean_cv_errors = 1 - output$pure_cv_m
+mean_oe_errors = 1 - output$pure_oe_m
+mean_alt_errors = 1 - output$altrun_m
+mean_rand_errors = 1 - output$shuff_m
+alt_switch_errors = 1 - output$switch_altrun_m
+alt_non_switch_errors = 1 - output$no_switch_altrun_m
+rand_switch_errors = 1 - output$switch_shuff_m
+rand_non_switch_errors = 1 - output$no_switch_shuff_m
+
+pure_block_errors = mean_cv_errors - mean_oe_errors
+
+##global switch cost
+global_cost_alt = alt_non_switch_errors - pure_block_errors
+global_cost_rand = rand_non_switch_errors - pure_block_errors
+
+##local switch cost
+local_switch_cost_alt = alt_switch_errors - alt_non_switch_errors
+local_switch_cost_rand = rand_switch_errors - rand_non_switch_errors
+
+##put it all together
+output_errors = data.frame(mean_cv_errors, mean_oe_errors, pure_block_errors,
+                           alt_switch_errors, alt_non_switch_errors, rand_switch_errors, rand_non_switch_errors,
+                           global_cost_alt, global_cost_rand,
+                           local_switch_cost_alt, local_switch_cost_rand)
+
+#write.csv(output_errors, file = "Output errors 4_2.csv", row.names = FALSE)

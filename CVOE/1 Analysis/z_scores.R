@@ -1,5 +1,7 @@
-dat = read.csv("Final_CVOE_Trimmed.csv")
-dat = dat[ , -1]
+dat = read.csv("Final_CVOE_Trimmed 4_1.csv")
+#dat = dat[ , -1]
+
+table(dat$Subject)
 
 ####zscore each individual####
 ##start w/ making all the subsets!
@@ -27,14 +29,24 @@ sub11 = subset(dat,
               dat$Subject == 11)
 sub12 = subset(dat,
               dat$Subject == 12)
-#sub13 = subset(dat,
-#              dat$Subject == 13)
-#sub14 = subset(dat,
-#              dat$Subject == 14)
+sub13 = subset(dat,
+              dat$Subject == 13)
+sub14 = subset(dat,
+              dat$Subject == 14)
 sub15 = subset(dat,
               dat$Subject == 15)
 sub16 = subset(dat,
               dat$Subject == 16)
+sub17 = subset(dat,
+              dat$Subject == 17)
+sub18 = subset(dat,
+              dat$Subject == 18)
+sub19 = subset(dat,
+              dat$Subject == 19)
+sub20 = subset(dat,
+              dat$Subject == 20)
+sub21 = subset(dat,
+              dat$Subject == 21)
 
 ##start z-scoring response
 sub1$score2_z = scale(sub1$score2, scale = TRUE)
@@ -49,14 +61,19 @@ sub9$score2_z = scale(sub9$score2, scale = TRUE)
 sub10$score2_z = scale(sub10$score2, scale = TRUE)
 sub11$score2_z = scale(sub11$score2, scale = TRUE)
 sub12$score2_z = scale(sub12$score2, scale = TRUE)
-#sub13$score2_z = scale(sub13$score2, scale = TRUE)
-#sub14$score2_z = scale(sub14$score2, scale = TRUE)
+sub13$score2_z = scale(sub13$score2, scale = TRUE)
+sub14$score2_z = scale(sub14$score2, scale = TRUE)
 sub15$score2_z = scale(sub15$score2, scale = TRUE)
 sub16$score2_z = scale(sub16$score2, scale = TRUE)
+sub17$score2_z = scale(sub17$score2, scale = TRUE)
+sub18$score2_z = scale(sub18$score2, scale = TRUE)
+sub19$score2_z = scale(sub19$score2, scale = TRUE)
+sub20$score2_z = scale(sub20$score2, scale = TRUE)
+sub21$score2_z = scale(sub21$score2, scale = TRUE)
 
 ##put it all back together
 z_scored1 = rbind(sub1, sub2, sub3, sub4, sub5, sub6, sub7, sub8, sub9, sub10,
-                  sub11, sub12, sub15, sub16)
+                  sub11, sub12, sub13, sub14, sub15, sub16, sub17, sub18, sub19, sub20, sub21)
 
 ####RTs####
 ##make RT subset
@@ -87,14 +104,24 @@ sub11 = subset(rt,
                rt$Subject == 11)
 sub12 = subset(rt,
                rt$Subject == 12)
-#sub13 = subset(rt,
-#              rt$Subject == 13)
-#sub14 = subset(rt,
-#              rt$Subject == 14)
+sub13 = subset(rt,
+              rt$Subject == 13)
+sub14 = subset(rt,
+              rt$Subject == 14)
 sub15 = subset(rt,
                rt$Subject == 15)
 sub16 = subset(rt,
                rt$Subject == 16)
+sub17 = subset(rt,
+               rt$Subject == 17)
+sub18 = subset(rt,
+               rt$Subject == 18)
+sub19 = subset(rt,
+               rt$Subject == 19)
+sub20 = subset(rt,
+               rt$Subject == 20)
+sub21 = subset(rt,
+               rt$Subject == 21)
 
 ##start z-scoring response
 sub1$RT_z = scale(sub1$RT, scale = TRUE)
@@ -109,14 +136,19 @@ sub9$RT_z = scale(sub9$RT, scale = TRUE)
 sub10$RT_z = scale(sub10$RT, scale = TRUE)
 sub11$RT_z = scale(sub11$RT, scale = TRUE)
 sub12$RT_z = scale(sub12$RT, scale = TRUE)
-#sub13$RT_z = scale(sub13$RT, scale = TRUE)
-#sub14$RT_z = scale(sub14$RT, scale = TRUE)
+sub13$RT_z = scale(sub13$RT, scale = TRUE)
+sub14$RT_z = scale(sub14$RT, scale = TRUE)
 sub15$RT_z = scale(sub15$RT, scale = TRUE)
 sub16$RT_z = scale(sub16$RT, scale = TRUE)
+sub17$RT_z = scale(sub17$RT, scale = TRUE)
+sub18$RT_z = scale(sub18$RT, scale = TRUE)
+sub19$RT_z = scale(sub19$RT, scale = TRUE)
+sub20$RT_z = scale(sub20$RT, scale = TRUE)
+sub21$RT_z = scale(sub21$RT, scale = TRUE)
 
 ##put it all back together
 rt_output = rbind(sub1, sub2, sub3, sub4, sub5, sub6, sub7, sub8, sub9, sub10,
-                  sub11, sub12, sub15, sub16)
+                  sub11, sub12, sub13, sub14, sub15, sub16, sub17, sub18, sub19, sub20, sub21)
 
 ####Get means for z_scored data####
 ##mean rts by group
@@ -224,17 +256,17 @@ z_no_switch_alt_run_rt = list(z_rt3[1, ])
 z_no_switch_shuff_rt = list(z_rt3[4, ])
 
 ####put all the output into a dataframe
-subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16)
+subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)
 
-output = data.frame(subID, pure_cv_m, pure_cv_rt, pure_oe_m, pure_oe_rt, alt_run_m, alt_run_rt, 
+outputz = data.frame(subID, pure_cv_m, pure_cv_rt, pure_oe_m, pure_oe_rt, alt_run_m, alt_run_rt, 
                     shuff_m, shuff_rt, switch_alt_run_m, switch_alt_run_rt, switch_shuff_m, 
                     switch_shuff_rt, no_switch_alt_run_m, no_switch_alt_run_rt,
                     no_switch_shuff_m, no_switch_shuff_rt)
 
 
-colnames(output)[2:17] = c("pure_cv_m", "pure_cv_rt", "pure_oe_m", "pure_oe_rt", "altrun_m", "altrun_rt",
+colnames(outputz)[2:17] = c("pure_cv_m", "pure_cv_rt", "pure_oe_m", "pure_oe_rt", "altrun_m", "altrun_rt",
                            "shuff_m", "shuff_rt", "switch_altrun_m", "switch_altrun_rt", "switch_shuff_m",
                            "switch_shuff_rt", "no_switch_altrun_m", "no_switch_altrun_rt",
                            "no_switch_shuff_m", "no_switch_shuff_rt")
 
-#write.csv(output, file = "CVOE_Means.csv", row.names = FALSE)
+#write.csv(outputz, file = "CVOE_Means 4_1.csv", row.names = FALSE)

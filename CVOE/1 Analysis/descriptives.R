@@ -200,3 +200,4 @@ output_RT = data.frame(mean_cv_rt, mean_oe_rt, pure_RT,
                        global_cost_alt_RT, global_cost_rand_RT,
                        local_switch_cost_alt_RT, local_switch_cost_rand_RT)
 
+#write.csv(output_RT, file = "Output RTs 4_4.csv", row.names = FALSE)

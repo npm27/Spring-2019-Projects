@@ -1,4 +1,6 @@
-dat = read.csv("corrected.csv")
+dat = read.csv("corrected 4_1.csv")
+
+dat = dat[ , -1]
 
 dat$zRT = scale(dat$RT, center = TRUE, scale = TRUE)
 
@@ -13,4 +15,4 @@ p = removed / nrow(dat)
 p
 
 ##write to csv
-write.csv(dat.trimmed2, file = "Final_CVOE_Trimmed.csv", row.names = FALSE)
+#write.csv(dat.trimmed2, file = "Final_CVOE_Trimmed 4_1.csv", row.names = FALSE)

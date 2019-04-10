@@ -1,5 +1,5 @@
 ##Load data
-combined = read.csv("Final_CVOE_Trimmed.csv")
+combined = read.csv("Final_CVOE_Trimmed 4_1.csv")
 
 rt = subset(combined,
             combined$score2 == 1)
@@ -58,26 +58,12 @@ pure_oe_m = list(m1[3, ])
 alt_run_m = list(m1[1, ])
 shuff_m = list(m1[4, ])
 
-rt1 = tapply(rt$RT,
-       list(rt$block_type, rt$Subject), mean)
-
-pure_cv_rt = list(rt1[2, ])
-pure_oe_rt = list(rt1[3, ])
-alt_run_rt = list(rt1[1, ])
-shuff_rt = list(rt1[4, ])
-
 ##Switch
 m2 = tapply(yes.switch$score2,
        list(yes.switch$block_type, yes.switch$Subject), mean)
 
 switch_alt_run_m = list(m2[1, ])
 switch_shuff_m = list(m2[4, ])
-
-rt2 = tapply(yes.switch.rt$RT,
-       list(yes.switch.rt$block_type, yes.switch.rt$Subject), mean)
-
-switch_alt_run_rt = list(rt2[1, ])
-switch_shuff_rt = list(rt2[4, ])
 
 ##non-switch
 m3 = tapply(no.switch$score2,
@@ -86,24 +72,131 @@ m3 = tapply(no.switch$score2,
 no_switch_alt_run_m = list(m3[1, ])
 no_switch_shuff_m = list(m3[4, ])
 
+##put all the output into a dataframe
+subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)
+
+output = data.frame(subID, pure_cv_m, pure_oe_m, alt_run_m, 
+                     shuff_m, switch_alt_run_m, switch_shuff_m, 
+                     no_switch_alt_run_m,
+                     no_switch_shuff_m)
+
+
+colnames(output)[2:8] = c("pure_cv_m", "pure_oe_m", "altrun_m",
+                           "switch_altrun_m",  "switch_shuff_m",
+                            "no_switch_altrun_m",
+                           "no_switch_shuff_m")
+
+#write.csv(output, file = "CVOE_Means.csv", row.names = FALSE)
+
+####set up output####
+##mean errors
+mean_cv_errors = 1 - output$pure_cv_m
+mean_oe_errors = 1 - output$pure_oe_m
+mean_alt_errors = 1 - output$altrun_m
+mean_rand_errors = 1 - output$shuff_m
+alt_switch_errors = 1 - output$switch_altrun_m
+alt_non_switch_errors = 1 - output$no_switch_altrun_m
+rand_switch_errors = 1 - output$switch_shuff_m
+rand_non_switch_errors = 1 - output$no_switch_shuff_m
+
+pure_block_errors = (mean_cv_errors + mean_oe_errors) / 2
+
+##global switch cost
+global_cost_alt = alt_non_switch_errors - pure_block_errors
+global_cost_rand = rand_non_switch_errors - pure_block_errors
+
+##local switch cost
+local_switch_cost_alt = alt_switch_errors - alt_non_switch_errors
+local_switch_cost_rand = rand_switch_errors - rand_non_switch_errors
+
+##put it all together
+output_errors = data.frame(mean_cv_errors, mean_oe_errors, pure_block_errors,
+                           alt_switch_errors, alt_non_switch_errors, rand_switch_errors, rand_non_switch_errors,
+                           global_cost_alt, global_cost_rand,
+                           local_switch_cost_alt, local_switch_cost_rand)
+
+#write.csv(output_errors, file = "Output Means 4_4.csv", row.names = FALSE)
+
+####RTs####
+##read in trimmed data
+trimmed = read.csv("Final_CVOE_Trimmed 4_1.csv")
+summary(trimmed)
+
+rt = trimmed
+
+####set up data####
+##overall
+rt1 = tapply(rt$RT,
+             list(rt$block_type, rt$Subject), mean)
+
+pure_cv_rt = list(rt1[2, ])
+pure_oe_rt = list(rt1[3, ])
+alt_run_rt = list(rt1[1, ])
+shuff_rt = list(rt1[4, ])
+
+##switch
+yes.switch.rt = subset(rt,
+                       rt$Switch == "Y")
+no.switch.rt = subset(rt,
+                      rt$Switch == "N")
+
+rt2 = tapply(yes.switch.rt$RT,
+             list(yes.switch.rt$block_type, yes.switch.rt$Subject), mean)
+
+switch_alt_run_rt = list(rt2[1, ])
+switch_shuff_rt = list(rt2[4, ])
+
+##non-switch
 rt3 = tapply(no.switch.rt$RT,
-       list(no.switch.rt$block_type, no.switch.rt$Subject), mean)
+             list(no.switch.rt$block_type, no.switch.rt$Subject), mean)
 
 no_switch_alt_run_rt = list(rt3[1, ])
 no_switch_shuff_rt = list(rt3[4, ])
 
-####put all the output into a dataframe
-subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16)
+##get all the rt stuff into a dataframe
+subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)
 
-output = data.frame(subID, pure_cv_m, pure_cv_rt, pure_oe_m, pure_oe_rt, alt_run_m, alt_run_rt, 
-                    shuff_m, shuff_rt, switch_alt_run_m, switch_alt_run_rt, switch_shuff_m, 
-                    switch_shuff_rt, no_switch_alt_run_m, no_switch_alt_run_rt,
-                    no_switch_shuff_m, no_switch_shuff_rt)
+output2 = data.frame(subID, pure_cv_rt, pure_oe_rt, alt_run_rt, 
+                    shuff_rt, switch_alt_run_rt,
+                    switch_shuff_rt, no_switch_alt_run_rt,
+                    no_switch_shuff_rt)
 
 
-colnames(output)[2:17] = c("pure_cv_m", "pure_cv_rt", "pure_oe_m", "pure_oe_rt", "altrun_m", "altrun_rt",
-                           "shuff_m", "shuff_rt", "switch_altrun_m", "switch_altrun_rt", "switch_shuff_m",
-                           "switch_shuff_rt", "no_switch_altrun_m", "no_switch_altrun_rt",
-                           "no_switch_shuff_m", "no_switch_shuff_rt")
+colnames(output2)[2:9] = c("pure_cv_rt", "pure_oe_rt", "altrun_rt",
+                           "shuff_rt", "switch_altrun_rt",
+                           "switch_shuff_rt", "no_switch_altrun_rt",
+                           "no_switch_shuff_rt")
 
-#write.csv(output, file = "CVOE_Means.csv", row.names = FALSE)
+##get cv, oe, alt, and shuff
+mean_cv_rt = output2$pure_cv_rt
+mean_oe_rt = output2$pure_oe_rt
+mean_alt_rt = output2$altrun_rt
+mean_shuff_rt = output2$shuff_rt
+
+##switch and non switch
+##altrun
+switch_altrun_rt = output2$switch_altrun_rt
+non_altrun_rt = output2$no_switch_altrun_rt
+
+##shuff
+switch_rand_rt = output2$switch_shuff_rt
+non_rand_rt = output2$no_switch_shuff_rt
+
+##get pure, local, and global
+pure_RT= (output2$pure_cv_rt + output2$pure_oe_rt) / 2
+
+##global switch cost
+global_cost_alt_RT = output2$no_switch_altrun_rt - pure_RT
+global_cost_rand_RT = output2$no_switch_shuff_rt - pure_RT
+
+##local switch cost
+local_switch_cost_alt_RT = output2$switch_altrun_rt - output2$no_switch_altrun_rt
+local_switch_cost_rand_RT = output2$switch_shuff_rt - output2$no_switch_shuff_rt
+
+##put everything together
+output_RT = data.frame(mean_cv_rt, mean_oe_rt, pure_RT,
+                       switch_altrun_rt, non_altrun_rt,
+                       switch_rand_rt, non_rand_rt,
+                       global_cost_alt_RT, global_cost_rand_RT,
+                       local_switch_cost_alt_RT, local_switch_cost_rand_RT)
+

@@ -1,5 +1,5 @@
 ##Load data
-combined = read.csv("Final_CVOE_Trimmed 4_1.csv")
+combined = read.csv("corrected 4_16.csv")
 
 rt = subset(combined,
             combined$score2 == 1)
@@ -73,7 +73,7 @@ no_switch_alt_run_m = list(m3[1, ])
 no_switch_shuff_m = list(m3[4, ])
 
 ##put all the output into a dataframe
-subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)
+subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 36)
 
 output = data.frame(subID, pure_cv_m, pure_oe_m, alt_run_m, 
                      shuff_m, switch_alt_run_m, switch_shuff_m, 
@@ -115,14 +115,15 @@ output_errors = data.frame(mean_cv_errors, mean_oe_errors, pure_block_errors,
                            global_cost_alt, global_cost_rand,
                            local_switch_cost_alt, local_switch_cost_rand)
 
-#write.csv(output_errors, file = "Output Means 4_4.csv", row.names = FALSE)
+#write.csv(output_errors, file = "Output Means 4_16.csv", row.names = FALSE)
 
 ####RTs####
 ##read in trimmed data
-trimmed = read.csv("Final_CVOE_Trimmed 4_1.csv")
+trimmed = read.csv("Final_CVOE_Trimmed 4_16.csv")
 summary(trimmed)
 
-rt = trimmed
+rt = subset(trimmed,
+            trimmed$score2 == 1)
 
 ####set up data####
 ##overall
@@ -154,7 +155,7 @@ no_switch_alt_run_rt = list(rt3[1, ])
 no_switch_shuff_rt = list(rt3[4, ])
 
 ##get all the rt stuff into a dataframe
-subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)
+subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 36)
 
 output2 = data.frame(subID, pure_cv_rt, pure_oe_rt, alt_run_rt, 
                     shuff_rt, switch_alt_run_rt,
@@ -200,4 +201,4 @@ output_RT = data.frame(mean_cv_rt, mean_oe_rt, pure_RT,
                        global_cost_alt_RT, global_cost_rand_RT,
                        local_switch_cost_alt_RT, local_switch_cost_rand_RT)
 
-#write.csv(output_RT, file = "Output RTs 4_4.csv", row.names = FALSE)
+#write.csv(output_RT, file = "Output RTs 4_16.csv", row.names = FALSE)

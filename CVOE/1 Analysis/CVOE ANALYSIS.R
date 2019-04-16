@@ -8,7 +8,7 @@ options(scipen = 999)
 
 ####errors####
 ##need percent error for pure, switch, and nonswitch
-dat.errors = read.csv("corrected 4_1.csv")
+dat.errors = read.csv("corrected 4_16.csv")
 
 dat.errors$error_rate = 1 - dat.errors$score2
 

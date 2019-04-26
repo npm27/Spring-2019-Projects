@@ -1,5 +1,5 @@
 ##Load data
-combined = read.csv("corrected 4_16.csv")
+combined = read.csv("older 4_19.csv")
 
 rt = subset(combined,
             combined$score2 == 1)
@@ -7,11 +7,11 @@ rt = subset(combined,
 ####check descriptives####
 ##mean rts by group
 tapply(combined$RT,
-              combined$block_type, mean)
+       combined$block_type, mean)
 
 ##mean percent correct by group
 tapply(combined$score2 * 100,
-              combined$block_type, mean)
+       combined$block_type, mean)
 
 ##differences within switch groups
 ##make a switch group subset
@@ -21,9 +21,9 @@ no.switch = subset(combined,
                    combined$Switch == "N")
 
 yes.switch.rt = subset(rt,
-                    rt$Switch == "Y")
+                       rt$Switch == "Y")
 no.switch.rt = subset(rt,
-                   rt$Switch == "N")
+                      rt$Switch == "N")
 
 tapply(yes.switch$RT,
        yes.switch$block_type, mean)
@@ -51,7 +51,7 @@ tapply(combined$score,
 ####check by subject####
 ##overall
 m1 = tapply(combined$score2,
-       list(combined$block_type, combined$Subject), mean)
+            list(combined$block_type, combined$Subject), mean)
 
 pure_cv_m = list(m1[2, ])
 pure_oe_m = list(m1[3, ])
@@ -60,31 +60,34 @@ shuff_m = list(m1[4, ])
 
 ##Switch
 m2 = tapply(yes.switch$score2,
-       list(yes.switch$block_type, yes.switch$Subject), mean)
+            list(yes.switch$block_type, yes.switch$Subject), mean)
 
 switch_alt_run_m = list(m2[1, ])
 switch_shuff_m = list(m2[4, ])
 
 ##non-switch
 m3 = tapply(no.switch$score2,
-       list(no.switch$block_type, no.switch$Subject), mean)
+            list(no.switch$block_type, no.switch$Subject), mean)
 
 no_switch_alt_run_m = list(m3[1, ])
 no_switch_shuff_m = list(m3[4, ])
 
+table(combined$Subject)
+
 ##put all the output into a dataframe
-subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 36)
+#subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 36)
+subID = c("1001", "1002", "1003", "2001", "2002", "2003")
 
 output = data.frame(subID, pure_cv_m, pure_oe_m, alt_run_m, 
-                     shuff_m, switch_alt_run_m, switch_shuff_m, 
-                     no_switch_alt_run_m,
-                     no_switch_shuff_m)
+                    shuff_m, switch_alt_run_m, switch_shuff_m, 
+                    no_switch_alt_run_m,
+                    no_switch_shuff_m)
 
 
 colnames(output)[2:8] = c("pure_cv_m", "pure_oe_m", "altrun_m",
-                           "switch_altrun_m",  "switch_shuff_m",
-                            "no_switch_altrun_m",
-                           "no_switch_shuff_m")
+                          "switch_altrun_m",  "switch_shuff_m",
+                          "no_switch_altrun_m",
+                          "no_switch_shuff_m")
 
 #write.csv(output, file = "CVOE_Means.csv", row.names = FALSE)
 
@@ -115,11 +118,11 @@ output_errors = data.frame(mean_cv_errors, mean_oe_errors, pure_block_errors,
                            global_cost_alt, global_cost_rand,
                            local_switch_cost_alt, local_switch_cost_rand)
 
-#write.csv(output_errors, file = "Output Means 4_16.csv", row.names = FALSE)
+#write.csv(output_errors, file = "older Means 4_19.csv", row.names = FALSE)
 
 ####RTs####
 ##read in trimmed data
-trimmed = read.csv("Final_CVOE_Trimmed 4_16.csv")
+trimmed = read.csv("Older_CVOE_Trimmed 4_19.csv")
 summary(trimmed)
 
 rt = subset(trimmed,
@@ -155,12 +158,13 @@ no_switch_alt_run_rt = list(rt3[1, ])
 no_switch_shuff_rt = list(rt3[4, ])
 
 ##get all the rt stuff into a dataframe
-subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 36)
+#subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 36)
+subID = c("1001", "1002", "1003", "2001", "2002", "2003")
 
 output2 = data.frame(subID, pure_cv_rt, pure_oe_rt, alt_run_rt, 
-                    shuff_rt, switch_alt_run_rt,
-                    switch_shuff_rt, no_switch_alt_run_rt,
-                    no_switch_shuff_rt)
+                     shuff_rt, switch_alt_run_rt,
+                     switch_shuff_rt, no_switch_alt_run_rt,
+                     no_switch_shuff_rt)
 
 
 colnames(output2)[2:9] = c("pure_cv_rt", "pure_oe_rt", "altrun_rt",
@@ -201,4 +205,4 @@ output_RT = data.frame(mean_cv_rt, mean_oe_rt, pure_RT,
                        global_cost_alt_RT, global_cost_rand_RT,
                        local_switch_cost_alt_RT, local_switch_cost_rand_RT)
 
-#write.csv(output_RT, file = "Output RTs 4_16.csv", row.names = FALSE)
+#write.csv(output_RT, file = "Older RTs 4_19.csv", row.names = FALSE)

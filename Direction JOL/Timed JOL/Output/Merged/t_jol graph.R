@@ -1,6 +1,9 @@
 ##set up
 dat = read.csv("ex2 final output.csv")
 
+summary(dat)
+summary(nomiss3)
+
 library(ggplot2)
 library(reshape)
 
@@ -11,7 +14,7 @@ dat$Scored_Response = (dat$Scored_Response * 100)
 dat$Jol_Response[dat$Jol_Response > 100] = NA
 
 ##get sample size
-summary(dat$Subject) #n = 27
+summary(dat$Subject) #n = 34
 
 summary(dat)
 
@@ -52,8 +55,8 @@ cleanup = theme(panel.grid.major = element_blank(),
                 legend.key = element_rect(fill = "white"),
                 text = element_text(size = 15))
 
-bar1 = ggplot(long.dat, aes(Direction, Score, fill = Task))
-bar1 = bar1 +
+bar3 = ggplot(long.dat, aes(Direction, Score, fill = Task))
+bar3 = bar3 +
   stat_summary(fun.y = mean, 
                geom = "bar",
                position = "dodge",
@@ -64,14 +67,14 @@ bar1 = bar1 +
                width = 0.2,
                color = "black") +
   scale_fill_manual("Task",
-                    values = c("Jol" = "midnightblue",
-                               "Recall" = "dodgerblue")) +
+                    values = c("Jol" = "white",
+                               "Recall" = "grey")) +
   cleanup +
   xlab("Direction") +
   ylab("Mean Task Performance")
   #ylim(0,100)
   #labs(title="All Blocks") 
-bar1
+bar3
 
 ##get means
 tapply(nomissing$Scored_Response,

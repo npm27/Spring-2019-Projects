@@ -3,9 +3,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-dat = pd.read_csv("conf_plot_2.csv") #JUST NEED TO ADD DATA
+dat = pd.read_csv("Delayed conf.csv") #JUST NEED TO ADD DATA
 
-dat['diff'] = dat['upper'].sub(dat['lower'])
+dat['diff'] = dat['Upper'].sub(dat['Lower'])
 dat['diff2'] = dat['diff'].div(2)
 
 ##make subsets
@@ -87,4 +87,4 @@ ax4.set_title("Unrelated", fontsize = 16)
 ax4.errorbar(x4, y4, yerr=(datU['diff2']), fmt='none', c= 'k', capsize=5)
 
 ##save figure
-#fig.savefig('Plot2.pdf')
+#fig.savefig('Plot2_smoothed.png')

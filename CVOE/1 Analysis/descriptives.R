@@ -1,5 +1,5 @@
 ##Load data
-combined = read.csv("corrected 4_16.csv")
+combined = read.csv("Final_CVOE_Trimmed 8_16.csv")
 
 rt = subset(combined,
             combined$score2 == 1)
@@ -9,9 +9,9 @@ rt = subset(combined,
 tapply(combined$RT,
               combined$block_type, mean)
 
-##mean percent correct by group
-tapply(combined$score2 * 100,
-              combined$block_type, mean)
+##mean percent error by block type
+tapply((1 - combined$score2) * 100,
+             combined$block_type, mean)
 
 ##differences within switch groups
 ##make a switch group subset
@@ -73,16 +73,27 @@ no_switch_alt_run_m = list(m3[1, ])
 no_switch_shuff_m = list(m3[4, ])
 
 ##put all the output into a dataframe
-subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 36)
+#first need to get the sub ID. I could type it all out, but that's going to be too time consuming once this gets big
 
+#so, lets try to make a table of subject numbers then grab the index.
+library(data.table)
+
+d = table(combined$Subject)
+d = as.data.frame(d)
+d = setDT(d, keep.rownames = TRUE)[]
+
+#subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 36)
+subID = d$Var1 #This does the same thing as the line above it
+
+#make the thing!
 output = data.frame(subID, pure_cv_m, pure_oe_m, alt_run_m, 
                      shuff_m, switch_alt_run_m, switch_shuff_m, 
                      no_switch_alt_run_m,
                      no_switch_shuff_m)
 
-
-colnames(output)[2:8] = c("pure_cv_m", "pure_oe_m", "altrun_m",
-                           "switch_altrun_m",  "switch_shuff_m",
+#name the columns!
+colnames(output)[2:9] = c("pure_cv_m", "pure_oe_m", "altrun_m",
+                           "shuff_m", "switch_altrun_m",  "switch_shuff_m",
                             "no_switch_altrun_m",
                            "no_switch_shuff_m")
 
@@ -110,19 +121,21 @@ local_switch_cost_alt = alt_switch_errors - alt_non_switch_errors
 local_switch_cost_rand = rand_switch_errors - rand_non_switch_errors
 
 ##put it all together
-output_errors = data.frame(mean_cv_errors, mean_oe_errors, pure_block_errors,
+output_errors = data.frame(subID, mean_cv_errors, mean_oe_errors, pure_block_errors,
                            alt_switch_errors, alt_non_switch_errors, rand_switch_errors, rand_non_switch_errors,
                            global_cost_alt, global_cost_rand,
                            local_switch_cost_alt, local_switch_cost_rand)
 
-#write.csv(output_errors, file = "Output Means 4_16.csv", row.names = FALSE)
+#write.csv(output_errors, file = "Output Mean Errors 8_6.csv", row.names = FALSE)
+
+###BROOM WORKSPACE HERE###
 
 ####RTs####
 ##read in trimmed data
-trimmed = read.csv("Final_CVOE_Trimmed 4_16.csv")
+trimmed = read.csv("Final_CVOE_Trimmed 8_16.csv")
 summary(trimmed)
 
-rt = subset(trimmed,
+rt = subset(trimmed, #get only the correct responses for RTs
             trimmed$score2 == 1)
 
 ####set up data####
@@ -154,8 +167,18 @@ rt3 = tapply(no.switch.rt$RT,
 no_switch_alt_run_rt = list(rt3[1, ])
 no_switch_shuff_rt = list(rt3[4, ])
 
+table(dat)
+
 ##get all the rt stuff into a dataframe
-subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 36)
+#subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 36)
+
+library(data.table)
+
+d = table(trimmed$Subject)
+d = as.data.frame(d)
+d = setDT(d, keep.rownames = TRUE)[]
+
+subID = d$Var1
 
 output2 = data.frame(subID, pure_cv_rt, pure_oe_rt, alt_run_rt, 
                     shuff_rt, switch_alt_run_rt,
@@ -195,10 +218,10 @@ local_switch_cost_alt_RT = output2$switch_altrun_rt - output2$no_switch_altrun_r
 local_switch_cost_rand_RT = output2$switch_shuff_rt - output2$no_switch_shuff_rt
 
 ##put everything together
-output_RT = data.frame(mean_cv_rt, mean_oe_rt, pure_RT,
+output_RT = data.frame(subID, mean_cv_rt, mean_oe_rt, pure_RT,
                        switch_altrun_rt, non_altrun_rt,
                        switch_rand_rt, non_rand_rt,
                        global_cost_alt_RT, global_cost_rand_RT,
                        local_switch_cost_alt_RT, local_switch_cost_rand_RT)
 
-#write.csv(output_RT, file = "Output RTs 4_16.csv", row.names = FALSE)
+#write.csv(output_RT, file = "Output RTs 8_6.csv", row.names = FALSE)

@@ -1,6 +1,6 @@
 ####create an answer key####
 ##setup
-dat = read.csv("Older Adults 4_17.csv")
+dat = read.csv("Older Adults pre scored.csv")
 
 pure = subset(dat,
               dat$block_type == "oe" | dat$block_type == "cv")
@@ -9,6 +9,7 @@ switch = subset(dat,
 
 library(tidyr)
 library(magicfor)
+library(data.table)
 
 for (i in dat$STIM){
   
@@ -205,4 +206,4 @@ colnames(switch.oe)[16] = "key2"
 
 final = rbind(pure.cv, pure.oe, switch.cv, switch.oe)
 
-#write.csv(final, file = "older 4_19.csv")
+#write.csv(final, file = "older scored 8_6.csv")

@@ -1,6 +1,6 @@
-dat = read.csv("corrected 4_16.csv")
+dat = read.csv("corrected pre-trimmed.csv")
 
-dat = dat[ , -1]
+#dat = dat[ , -1]
 
 dat$zRT = scale(dat$RT, center = TRUE, scale = TRUE)
 
@@ -14,5 +14,5 @@ removed = nrow(dat) - nrow(dat.trimmed2)
 p = removed / nrow(dat)
 p
 
-##write to csv
-#write.csv(dat.trimmed2, file = "Final_CVOE_Trimmed 4_16.csv", row.names = FALSE)
+#write to csv
+#write.csv(dat.trimmed2, file = "Final_CVOE_Trimmed 8_16.csv", row.names = FALSE)

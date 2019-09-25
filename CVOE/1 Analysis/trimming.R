@@ -15,4 +15,4 @@ p = removed / nrow(dat)
 p
 
 #write to csv
-#write.csv(dat.trimmed2, file = "Final_CVOE_Trimmed 8_16.csv", row.names = FALSE)
+#write.csv(dat.trimmed2, file = "Final_CVOE_Trimmed 9_22.csv", row.names = FALSE)

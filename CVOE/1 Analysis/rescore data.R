@@ -1,6 +1,6 @@
 ####create an answer key####
 ##setup
-dat = read.csv("CVOE 8_6_19.csv")
+dat = read.csv("CVOE 9_22.csv")
 
 pure = subset(dat,
               dat$block_type == "oe" | dat$block_type == "cv")
@@ -205,4 +205,4 @@ colnames(switch.oe)[16] = "key2"
 
 final = rbind(pure.cv, pure.oe, switch.cv, switch.oe)
 
-#write.csv(final, file = "scored 8_6.csv")
+#write.csv(final, file = "scored 9_22.csv")

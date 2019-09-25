@@ -1,5 +1,5 @@
 ##Load data
-combined = read.csv("Final_CVOE_Trimmed 8_16.csv")
+combined = read.csv("Final_CVOE_Trimmed 9_22.csv")
 
 rt = subset(combined,
             combined$score2 == 1)
@@ -97,7 +97,7 @@ colnames(output)[2:9] = c("pure_cv_m", "pure_oe_m", "altrun_m",
                             "no_switch_altrun_m",
                            "no_switch_shuff_m")
 
-#write.csv(output, file = "CVOE_Means.csv", row.names = FALSE)
+#write.csv(output, file = "CVOE_Means_9_24.csv", row.names = FALSE)
 
 ####set up output####
 ##mean errors
@@ -126,13 +126,13 @@ output_errors = data.frame(subID, mean_cv_errors, mean_oe_errors, pure_block_err
                            global_cost_alt, global_cost_rand,
                            local_switch_cost_alt, local_switch_cost_rand)
 
-#write.csv(output_errors, file = "Output Mean Errors 8_6.csv", row.names = FALSE)
+#write.csv(output_errors, file = "Output Mean Errors 9_24.csv", row.names = FALSE)
 
 ###BROOM WORKSPACE HERE###
 
 ####RTs####
 ##read in trimmed data
-trimmed = read.csv("Final_CVOE_Trimmed 8_16.csv")
+trimmed = read.csv("Final_CVOE_Trimmed 9_22.csv")
 summary(trimmed)
 
 rt = subset(trimmed, #get only the correct responses for RTs
@@ -167,7 +167,7 @@ rt3 = tapply(no.switch.rt$RT,
 no_switch_alt_run_rt = list(rt3[1, ])
 no_switch_shuff_rt = list(rt3[4, ])
 
-table(dat)
+#table(dat)
 
 ##get all the rt stuff into a dataframe
 #subID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 36)
@@ -224,4 +224,4 @@ output_RT = data.frame(subID, mean_cv_rt, mean_oe_rt, pure_RT,
                        global_cost_alt_RT, global_cost_rand_RT,
                        local_switch_cost_alt_RT, local_switch_cost_rand_RT)
 
-#write.csv(output_RT, file = "Output RTs 8_6.csv", row.names = FALSE)
+#write.csv(output_RT, file = "Output RTs 9_22.csv", row.names = FALSE)

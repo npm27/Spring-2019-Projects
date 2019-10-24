@@ -12,12 +12,15 @@ dat['diff'] = dat['Upper'].sub(dat['Lower']) #get the length of the bars
 dat['diff2'] = dat['diff'].div(2) #length from end of bar to cap
 
 ##split the data into RT and Error groups
-rt_dat = dat[ dat['TYPE'] == "RT"]
+error_dat = dat[ dat['TYPE'] == "ZRT"]
+
+#error_dat['Average'] = error_dat['Average'].multiply(100) #Disregard the warnings here
+#error_dat['diff2'] = error_dat['diff2'].multiply(100)
 
 ##split into groups bases on condition
-error_dat_ya = rt_dat[ rt_dat["Conditon"] == "Younger"]
-error_dat_healthy = rt_dat[ rt_dat["Conditon"] == "Healthy"]
-error_dat_mci = rt_dat[ rt_dat["Conditon"] == "MCI"]
+error_dat_ya = error_dat[ error_dat["Conditon"] == "Younger"]
+error_dat_healthy = error_dat[ error_dat["Conditon"] == "Healthy"]
+error_dat_mci = error_dat[ error_dat["Conditon"] == "MCI"]
 
 ##now get only the variables needed
 error_dat_ya2 = error_dat_ya[ error_dat_ya["VAR"].isin(["PURE", "ALT_SWITCH", "ALT_NS", "RAND_SWITCH", "RAND_NS"])] 
@@ -46,8 +49,8 @@ mci_conf = error_dat_mci2["diff2"]
 mci_conf2 = mci_conf.tolist()
 
 ##set up the plot
-RT_fig = plt.figure()
-RT_fig.set_size_inches(10,15)
+error_fig = plt.figure()
+error_fig.set_size_inches(10,15)
 
 ####First, lets plot errors for pure, nonswitch, and switch trials
 bars1 = ya_average2
@@ -55,8 +58,6 @@ bars2 = healthy_average2
 bars3 = mci_average2
 
 ##set bar width
-#bar width should add to 1. So for ax1, we have 5 bars. .2 * 5 = 1. ax2 there are 4 bars, .25 * 4 = 1
-#This allows the bars to be evenly spaced
 barwidth = 0.20 ##ax1
 barwidth2 = 0.25 ##ax2
 
@@ -68,8 +69,8 @@ r3 = [x + barwidth for x in r2]
 ##make the sub plots
 ##ax1 will be pure vs ns vs s
 ##ax2 will be local vs global
-ax1 = RT_fig.add_subplot(2, 1, 1)
-ax2 = RT_fig.add_subplot(2, 1, 2)
+ax1 = error_fig.add_subplot(2, 1, 1)
+ax2 = error_fig.add_subplot(2, 1, 2)
 
 ##make the plot
 rects1 = ax1.bar(r1, bars1, width = barwidth, yerr = ya_conf2, capsize = 3, color = 'w', edgecolor = 'k',
@@ -82,8 +83,8 @@ rects3 = ax1.bar(r3, bars3, width = barwidth, yerr = mci_conf2, capsize = 3, col
                 label = 'MCI Older')
 
 ##Add labels, legend, and set tick marks
-ax1.set_title('Reaction Times: Pure, Switch, and Non-Switch Trials', fontsize = 18)
-ax1.set_ylabel('Mean RT', fontsize = 16)
+ax1.set_title('Mean Error Rates: Pure, Switch, and Non-Switch Trials', fontsize = 18)
+ax1.set_ylabel('Mean % Error', fontsize = 16)
 ax1.set_xlabel('Trial Type', fontsize = 16)
 ax1.xaxis.labelpad = 7.5
 ax1.set_xticks(r2)
@@ -92,7 +93,8 @@ ax1.set_xticklabels(('Pure', 'Nonswitch Alt Run', 'Nonswitch Rand', 'Switch Alt 
 box = ax1.get_position()
 ax1.set_position([box.x0, box.y0, box.width * 0.8, box.height])
 ax1.legend(bbox_to_anchor=(1.04,0.5), loc="center left", borderaxespad = 0, fontsize = 14)
-#ax1.set_ylim([0,30])
+ax1.set_ylim([-.6,.6])
+ax1.axhline(y = 0, color='k', linestyle='-')
 
 ####Now make the graph for local vs global costs####
 ##get only the variables that are needed
@@ -127,7 +129,7 @@ bars5 = healthy_average4
 bars6 = mci_average4
 
 #set bar position
-r4 = np.arange(len(bars4)) + .5 #the +.5 helps with spacing
+r4 = np.arange(len(bars4)) + .5
 r5 = [x + barwidth2 for x in r4]
 r6 = [x + barwidth2 for x in r5]
 
@@ -142,8 +144,8 @@ rects6 = ax2.bar(r6, bars6, width = barwidth2, yerr = mci_conf4, capsize = 3, co
                 label = 'MCI Older')
 
 ##Add labels, legend, and set tick marks
-ax2.set_title('Reaction Times: Local and Global Switch Costs', fontsize = 18)
-ax2.set_ylabel('Mean RT', fontsize = 16)
+ax2.set_title('Mean Error Rates: Local and Global Switch Costs', fontsize = 18)
+ax2.set_ylabel('Mean % Error', fontsize = 16)
 ax2.set_xlabel('Cost Type', fontsize = 16)
 ax2.xaxis.labelpad = 7.5
 ax2.set_xticks(r5)
@@ -152,8 +154,8 @@ ax2.set_xticklabels(('Global Alt Run', 'Global Rand', 'Local Alt Run', 'Local Ra
 box = ax2.get_position()
 ax2.set_position([box.x0, box.y0, box.width * 0.8, box.height])
 ax2.legend(bbox_to_anchor = (1.04,0.5), loc="center left", borderaxespad = 0, fontsize = 14)
-#ax2.set_ylim([-15, 20])
-plt.axhline(y = 0, color='k', linestyle='-')
+ax2.set_ylim([-.1, 1])
+ax2.axhline(y = 0, color='k', linestyle='-')
 
 ##save figure
-#RT_fig.savefig('CVOE_RTs.pdf', dip = 10000)
+#error_fig.savefig('CVOE_Zrt.pdf', dip = 10000)

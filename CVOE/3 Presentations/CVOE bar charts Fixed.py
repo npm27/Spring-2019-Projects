@@ -153,8 +153,8 @@ ax2.set_xticklabels(('Global Alt Run', 'Global Rand', 'Local Alt Run', 'Local Ra
 box = ax2.get_position()
 ax2.set_position([box.x0, box.y0, box.width * 0.8, box.height])
 ax2.legend(bbox_to_anchor = (1.04,0.5), loc="center left", borderaxespad = 0, fontsize = 14)
-ax2.set_ylim([-15, 20])
+ax2.set_ylim([-3, 20])
 plt.axhline(y = 0, color='k', linestyle='-')
 
 ##save figure
-#error_fig.savefig('CVOE_mean_errors.pdf', dip = 10000)
+error_fig.savefig('CVOE_mean_errors.pdf', dip = 10000)

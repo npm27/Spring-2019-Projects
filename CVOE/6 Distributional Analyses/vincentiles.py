@@ -90,4 +90,4 @@ ax3.set_xlabel('Bin', fontsize = 16)
 ax3.set_ylabel('Mean RT', fontsize = 16)
 
 ##save figure
-#fig.savefig('Plot1_smoothed.png')
+#fig.savefig('vincentiles.pdf')

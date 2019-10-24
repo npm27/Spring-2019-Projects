@@ -93,8 +93,8 @@ switch.oe$response2 = switch.oe$Response
 switch.oe$response2 = as.numeric(switch.oe$response2)
 switch.oe$response2 = as.character(switch.oe$response2)
 
-switch.oe$response2[switch.oe$response2 == "1"] = "e"
-switch.oe$response2[switch.oe$response2 == "2"] = "o"
+switch.oe$response2[switch.oe$response2 == "2"] = "e"
+switch.oe$response2[switch.oe$response2 == "3"] = "o"
 
 ##make answer key columns for oe
 switch.oe$match2 = switch.oe$response2 == switch.oe$o_or_e
@@ -105,8 +105,8 @@ switch.cv$response2 = switch.cv$Response
 switch.cv$response2 = as.numeric(switch.cv$response2)
 switch.cv$response2 = as.character(switch.cv$response2)
 
-switch.cv$response2[switch.cv$response2 == "1"] = "v"
-switch.cv$response2[switch.cv$response2 == "2"] = "c"
+switch.cv$response2[switch.cv$response2 == "2"] = "v"
+switch.cv$response2[switch.cv$response2 == "3"] = "c"
 
 ##make answer key columns for cv
 switch.cv$match2 = switch.cv$response2 == switch.cv$c_or_v
@@ -178,8 +178,8 @@ pure.cv$response2 = pure.cv$Response
 pure.cv$response2 = as.numeric(pure.cv$response2)
 pure.cv$response2 = as.character(pure.cv$response2)
 
-pure.cv$response2[pure.cv$response2 == "1"] = "v"
-pure.cv$response2[pure.cv$response2 == "2"] = "c"
+pure.cv$response2[pure.cv$response2 == "2"] = "v"
+pure.cv$response2[pure.cv$response2 == "3"] = "c"
 
 ##make answer key columns for cv
 pure.cv$match2 = pure.cv$response2 == pure.cv$c_or_v
@@ -190,8 +190,8 @@ pure.oe$response2 = pure.oe$Response
 pure.oe$response2 = as.numeric(pure.oe$response2)
 pure.oe$response2 = as.character(pure.oe$response2)
 
-pure.oe$response2[pure.oe$response2 == "1"] = "e"
-pure.oe$response2[pure.oe$response2 == "2"] = "o"
+pure.oe$response2[pure.oe$response2 == "2"] = "e"
+pure.oe$response2[pure.oe$response2 == "3"] = "o"
 
 ##make answer key columns for oe
 pure.oe$match2 = pure.oe$response2 == pure.oe$o_or_e
@@ -206,4 +206,4 @@ colnames(switch.oe)[16] = "key2"
 
 final = rbind(pure.cv, pure.oe, switch.cv, switch.oe)
 
-#write.csv(final, file = "older scored 8_6.csv")
+#write.csv(final, file = "older scored 10_12.csv", row.names = FALSE)

@@ -220,7 +220,7 @@ output_RT = data.frame(output2$subID, mean_cv_rt, mean_oe_rt, pure_RT,
                        global_cost_alt_RT, global_cost_rand_RT,
                        local_switch_cost_alt_RT, local_switch_cost_rand_RT)
 
-write.csv(output_RT, file = "Older RTs 10_12.csv", row.names = FALSE)
+write.csv(output_RT, file = "Older RTs 11_18.csv", row.names = FALSE)
 
 #clear environment
 rm(list=ls())
@@ -232,7 +232,7 @@ rm(list=ls())
 rm(list = ls())
 
 ##read in trimmed data
-trimmed = read.csv("Older_CVOE_Trimmed 10_12.csv")
+trimmed = read.csv("Older_CVOE_Trimmed 11_18.csv")
 summary(trimmed)
 
 rt = subset(trimmed, #get only the correct responses for RTs
@@ -324,4 +324,4 @@ output_zRT = data.frame(subID, mean_cv_zrt, mean_oe_zrt, pure_zRT,
                         global_cost_alt_zRT, global_cost_rand_zRT,
                         local_switch_cost_alt_zRT, local_switch_cost_rand_zRT)
 
-write.csv(output_zRT, file = "Older zRTs 10_12.csv", row.names = FALSE)
+write.csv(output_zRT, file = "Older zRTs 11_18.csv", row.names = FALSE)

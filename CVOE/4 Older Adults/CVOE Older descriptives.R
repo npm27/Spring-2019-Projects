@@ -1,5 +1,5 @@
 ##Load data
-combined = read.csv("Older_CVOE_Trimmed 10_12.csv")
+combined = read.csv("Older_CVOE_Trimmed 2_12.csv")
 
 rt = subset(combined,
             combined$score2 == 1)

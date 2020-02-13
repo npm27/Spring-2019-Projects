@@ -1,4 +1,4 @@
-dat = read.csv("older scored 11_18.csv")
+dat = read.csv("older scored 2_12.csv")
 
 #dat = dat[ , -1]
 
@@ -15,4 +15,4 @@ p = removed / nrow(dat)
 p
 
 ##write to csv
-#write.csv(dat.trimmed, file = "Older_CVOE_Trimmed 11_18.csv", row.names = FALSE)
+#write.csv(dat.trimmed, file = "Older_CVOE_Trimmed 2_12.csv", row.names = FALSE)

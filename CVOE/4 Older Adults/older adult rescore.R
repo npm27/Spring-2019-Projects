@@ -206,4 +206,4 @@ colnames(switch.oe)[16] = "key2"
 
 final = rbind(pure.cv, pure.oe, switch.cv, switch.oe)
 
-#write.csv(final, file = "older scored 2_12.csv", row.names = FALSE)
+#write.csv(final, file = "older scored 3_4.csv", row.names = FALSE)

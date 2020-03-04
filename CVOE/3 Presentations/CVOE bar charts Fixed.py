@@ -93,7 +93,7 @@ ax1.set_xticklabels(('Pure', 'Nonswitch Alt Run', 'Nonswitch Rand', 'Switch Alt 
 box = ax1.get_position()
 ax1.set_position([box.x0, box.y0, box.width * 0.8, box.height])
 ax1.legend(bbox_to_anchor=(1.04,0.5), loc="center left", borderaxespad = 0, fontsize = 14)
-ax1.set_ylim([0,32])
+ax1.set_ylim([0,25])
 
 ####Now make the graph for local vs global costs####
 ##get only the variables that are needed
@@ -153,7 +153,7 @@ ax2.set_xticklabels(('Global Alt Run', 'Global Rand', 'Local Alt Run', 'Local Ra
 box = ax2.get_position()
 ax2.set_position([box.x0, box.y0, box.width * 0.8, box.height])
 ax2.legend(bbox_to_anchor = (1.04,0.5), loc="center left", borderaxespad = 0, fontsize = 14)
-ax2.set_ylim([-3, 20])
+ax2.set_ylim([-2, 15])
 plt.axhline(y = 0, color='k', linestyle='-')
 
 ##save figure

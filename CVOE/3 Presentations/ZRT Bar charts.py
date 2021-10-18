@@ -83,8 +83,8 @@ rects3 = ax1.bar(r3, bars3, width = barwidth, yerr = mci_conf2, capsize = 3, col
                 label = 'MCI Older')
 
 ##Add labels, legend, and set tick marks
-ax1.set_title('Mean Error Rates: Pure, Switch, and Non-Switch Trials', fontsize = 18)
-ax1.set_ylabel('Mean % Error', fontsize = 16)
+ax1.set_title('Mean Z RT: Pure, Switch, and Non-Switch Trials', fontsize = 18)
+ax1.set_ylabel('Mean Z RT', fontsize = 16)
 ax1.set_xlabel('Trial Type', fontsize = 16)
 ax1.xaxis.labelpad = 7.5
 ax1.set_xticks(r2)
@@ -144,8 +144,8 @@ rects6 = ax2.bar(r6, bars6, width = barwidth2, yerr = mci_conf4, capsize = 3, co
                 label = 'MCI Older')
 
 ##Add labels, legend, and set tick marks
-ax2.set_title('Mean Error Rates: Local and Global Switch Costs', fontsize = 18)
-ax2.set_ylabel('Mean % Error', fontsize = 16)
+ax2.set_title('Mean Z RT: Local and Global Switch Costs', fontsize = 18)
+ax2.set_ylabel('Mean Z RT', fontsize = 16)
 ax2.set_xlabel('Cost Type', fontsize = 16)
 ax2.xaxis.labelpad = 7.5
 ax2.set_xticks(r5)

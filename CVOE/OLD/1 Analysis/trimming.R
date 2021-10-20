@@ -2,7 +2,7 @@ dat = read.csv("corrected pre-trimmed.csv")
 
 #dat = dat[ , -1]
 
-dat$zRT = scale(dat$RT, center = TRUE, scale = TRUE)
+dat$zRT = with(dat, ave(RT, Subject, FUN = scale))
 
 dat.trimmed = subset(dat,
                      dat$zRT < 3)
@@ -15,4 +15,4 @@ p = removed / nrow(dat)
 p
 
 #write to csv
-#write.csv(dat.trimmed2, file = "Final_CVOE_Trimmed 9_22.csv", row.names = FALSE)
+#write.csv(dat.trimmed2, file = "Final_CVOE_Trimmed 10_3_21.csv", row.names = FALSE)

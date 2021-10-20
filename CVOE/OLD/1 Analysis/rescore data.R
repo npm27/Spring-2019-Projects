@@ -1,6 +1,6 @@
 ####create an answer key####
 ##setup
-dat = read.csv("CVOE 9_22.csv")
+dat = read.csv("CVOE 10_3_21.csv")
 
 pure = subset(dat,
               dat$block_type == "oe" | dat$block_type == "cv")
@@ -88,19 +88,21 @@ switch.cv$c_or_v[switch.cv$c_or_v == "5"] = "v"
 table(switch.cv$c_or_v)
 
 ##convert o e column to o's and e's
-switch.oe$response2 = switch.oe$Response
+switch.oe$response2 = factor(switch.oe$Response)
 switch.oe$response2 = as.numeric(switch.oe$response2)
 switch.oe$response2 = as.character(switch.oe$response2)
 
-switch.oe$response2[switch.oe$response2 == "1"] = "e"
-switch.oe$response2[switch.oe$response2 == "2"] = "o"
+switch.oe$response2[switch.oe$response2 == "2"] = "e"
+switch.oe$response2[switch.oe$response2 == "3"] = "o"
+
+switch.oe$response2[switch.oe$response2 == "1"] = NA
 
 ##make answer key columns for oe
 switch.oe$match2 = switch.oe$response2 == switch.oe$o_or_e
 switch.oe$score2 = as.numeric(switch.oe$match2)
 
 ##convert p q column to c's and v's
-switch.cv$response2 = switch.cv$Response
+switch.cv$response2 = factor(switch.cv$Response)
 switch.cv$response2 = as.numeric(switch.cv$response2)
 switch.cv$response2 = as.character(switch.cv$response2)
 
@@ -173,7 +175,7 @@ pure.cv$c_or_v[pure.cv$c_or_v == "5"] = "v"
 table(pure.cv$c_or_v)
 
 ##convert p q column to c's and v's
-pure.cv$response2 = pure.cv$Response
+pure.cv$response2 = factor(pure.cv$Response)
 pure.cv$response2 = as.numeric(pure.cv$response2)
 pure.cv$response2 = as.character(pure.cv$response2)
 
@@ -185,7 +187,7 @@ pure.cv$match2 = pure.cv$response2 == pure.cv$c_or_v
 pure.cv$score2 = as.numeric(pure.cv$match2)
 
 ##convert p q column to o's and e's
-pure.oe$response2 = pure.oe$Response
+pure.oe$response2 = factor(pure.oe$Response)
 pure.oe$response2 = as.numeric(pure.oe$response2)
 pure.oe$response2 = as.character(pure.oe$response2)
 
@@ -205,4 +207,4 @@ colnames(switch.oe)[16] = "key2"
 
 final = rbind(pure.cv, pure.oe, switch.cv, switch.oe)
 
-#write.csv(final, file = "scored 9_22.csv")
+#write.csv(final, file = "scored 10_03_21.csv")

@@ -1,6 +1,6 @@
 ####create an answer key####
 ##setup
-dat = read.csv("CVOE 10_3_21.csv")
+dat = read.csv("CVOE 10_25_21.csv")
 
 pure = subset(dat,
               dat$block_type == "oe" | dat$block_type == "cv")
@@ -92,10 +92,10 @@ switch.oe$response2 = factor(switch.oe$Response)
 switch.oe$response2 = as.numeric(switch.oe$response2)
 switch.oe$response2 = as.character(switch.oe$response2)
 
-switch.oe$response2[switch.oe$response2 == "2"] = "e"
-switch.oe$response2[switch.oe$response2 == "3"] = "o"
+switch.oe$response2[switch.oe$response2 == "1"] = "e"
+switch.oe$response2[switch.oe$response2 == "2"] = "o"
 
-switch.oe$response2[switch.oe$response2 == "1"] = NA
+#switch.oe$response2[switch.oe$response2 == "1"] = NA
 
 ##make answer key columns for oe
 switch.oe$match2 = switch.oe$response2 == switch.oe$o_or_e
@@ -207,4 +207,4 @@ colnames(switch.oe)[16] = "key2"
 
 final = rbind(pure.cv, pure.oe, switch.cv, switch.oe)
 
-#write.csv(final, file = "scored 10_03_21.csv")
+#write.csv(final, file = "scored 10_25_21.csv", row.names = F)

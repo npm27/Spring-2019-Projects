@@ -1,5 +1,5 @@
 ##Load data
-combined = read.csv("Final_CVOE_Trimmed 10_25_21.csv")
+combined = read.csv("Final_CVOE_Trimmed 11_20_21.csv")
 
 combined = na.omit(combined)
 
@@ -121,14 +121,14 @@ output_errors = data.frame(subID, mean_cv_errors, mean_oe_errors, pure_block_err
                            global_cost_alt, global_cost_rand,
                            local_switch_cost_alt, local_switch_cost_rand)
 
-write.csv(output_errors, file = "Output Mean Errors 10_25_21.csv", row.names = FALSE)
+write.csv(output_errors, file = "Output Mean Errors 11_20_21.csv", row.names = FALSE)
 
 ##clear the environment
 rm(list = ls())
 
 ####RTs####
 ##read in trimmed data
-trimmed = read.csv("Final_CVOE_Trimmed 10_25_21.csv")
+trimmed = read.csv("Final_CVOE_Trimmed 11_20_21.csv")
 summary(trimmed)
 
 rt = subset(trimmed, #get only the correct responses for RTs
@@ -220,7 +220,7 @@ output_RT = data.frame(subID, mean_cv_rt, mean_oe_rt, pure_RT,
                        global_cost_alt_RT, global_cost_rand_RT,
                        local_switch_cost_alt_RT, local_switch_cost_rand_RT)
 
-write.csv(output_RT, file = "Output RTs 10_25_21.csv", row.names = FALSE)
+write.csv(output_RT, file = "Output RTs 11_20_21.csv", row.names = FALSE)
 
 ####Zscore things####
 
